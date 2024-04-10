@@ -1,0 +1,10 @@
+{
+    "crons": [
+      {
+        "path": "/api/batchemailweekly",
+        "schedule": "0 0 8 ? * SUN *"
+      },
+      {
+      }
+    ]
+  }
