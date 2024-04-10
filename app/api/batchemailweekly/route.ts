@@ -1,4 +1,7 @@
+export const dynamic = 'force-dynamic';
+
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from "next/server";
 import EmailTemplate from '@components/emailTemplate';
 import { Resend } from 'resend';
 import clientPromise from '@lib/mongodb';
@@ -32,7 +35,8 @@ const dummyData = [
     }
 ]
 
-export async function GET() {
+export async function GET(request: Request) {
+
     const client = await clientPromise;
     const db = client.db("sachse-site");
     const emails = await db.collection('emails');
@@ -65,7 +69,18 @@ export async function GET() {
             }
         }));
 
-        return Response.json(data);
+        let response: NextResponse;
+
+        response = NextResponse.json(data)
+        response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+
+        // return new NextResponse(data, { status: 200, statusText: "OK", headers });
+        // return Response.json(data);
+        // return new Response(JSON.stringify(data), {
+        //     status: 200,
+        //     headers
+        //   })
+        return response;
     } catch (error) {
         console.error(error)
         return Response.json({ error });
