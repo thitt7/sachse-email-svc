@@ -69,17 +69,9 @@ export async function GET(request: Request) {
             }
         }));
 
-        let response: NextResponse;
-
-        response = NextResponse.json(data)
+        let response: NextResponse = NextResponse.json(data);
         response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
 
-        // return new NextResponse(data, { status: 200, statusText: "OK", headers });
-        // return Response.json(data);
-        // return new Response(JSON.stringify(data), {
-        //     status: 200,
-        //     headers
-        //   })
         return response;
     } catch (error) {
         console.error(error)

@@ -102,9 +102,9 @@ const EmailTemplate = ({ userData, alertData }: emailTemplateProps) => {
         />
         <div>
           <div style={containerStyles}>
-            <div style={{ textAlign: 'center' }}>
+            <Link href={'https://sachse.city/'} style={{ textAlign: 'center' }}>
               <h1 style={headingStyles}>See what&apos;s new in Sachse this week!</h1>
-            </div>
+            </Link>
             {alertsPref ?
               <>
                 <div style={{ textAlign: 'center' }}>
